@@ -1,0 +1,30 @@
+name: 'tfupdate Github Actions'
+description: 'Runs tfupdate via Github Actions'
+inputs:
+  tfupdate_subcommand:
+    description: 'Subcommand to execute'
+    required: true
+  tfupdate_path:
+    description: 'A path provided to tfupdate'
+    required: true
+    default: '.'
+  tfupdate_options:
+    description: 'Options provided to tfupdate'
+    required: false
+    default: '-r'
+  tfupdate_provider_name:
+    description: 'A name of provider (used if `provider` is given as the subcommand)'
+    required: false
+  github_token:
+    description: 'Github Token'
+    required: true
+  pr:
+    description: 'Whether or not to create a Pull Request'
+    required: false
+    default: true
+  pr_base_branch:
+    description: 'The base branch of a Pull Request'
+    required: false
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
