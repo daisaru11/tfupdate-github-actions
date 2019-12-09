@@ -20,7 +20,7 @@ jobs:
     - name: "Checkout"
       uses: actions/checkout@v1
     - name: tfupdate
-      uses: daisaru11/tfupdate-github-actions@master
+      uses: daisaru11/tfupdate-github-actions@v1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         tfupdate_subcommand: terraform
@@ -33,7 +33,7 @@ jobs:
     - name: "Checkout"
       uses: actions/checkout@v1
     - name: tfupdate
-      uses: daisaru11/tfupdate-github-actions@master
+      uses: daisaru11/tfupdate-github-actions@v1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         tfupdate_subcommand: provider
