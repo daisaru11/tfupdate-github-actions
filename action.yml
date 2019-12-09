@@ -22,10 +22,6 @@ inputs:
   github_token:
     description: 'Github Token'
     required: true
-  pr:
-    description: 'Whether or not to create a Pull Request'
-    required: false
-    default: true
   pr_base_branch:
     description: 'The base branch of a Pull Request'
     required: false
