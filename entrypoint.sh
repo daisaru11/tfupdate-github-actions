@@ -19,6 +19,16 @@ function subcommandTerraform {
       if git add . && git diff --cached --exit-code --quiet; then
         echo "No changes"
       else
+        if [ "${UPDATE_TFENV_VERSION_FILES}" == "1" ]; then
+          for UPDATED_HCL in $(git diff --cached --name-only); do
+            TFENV_VERSION_FILE="$(dirname $UPDATED_HCL)/.terraform-version"
+            if [ -f "$TFENV_VERSION_FILE" ]; then
+              echo "$VERSION" > "$TFENV_VERSION_FILE"
+            fi
+          done
+          git add .
+        fi
+
         git commit -m "$UPDATE_MESSAGE"
         PR_BODY="For details see: https://github.com/hashicorp/terraform/releases"
         git push origin HEAD && hub pull-request -m "$UPDATE_MESSAGE" -m "$PR_BODY" -b ${PR_BASE_BRANCH}
@@ -80,6 +90,11 @@ fi
 if [ "${TFUPDATE_PROVIDER_NAME}" == "" ] && [ "${TFUPDATE_SUBCOMMAND}" == "provider"]; then
   echo "tfupdate_provider_name is required if you are using the provider subcommand"
   exit 1
+fi
+
+UPDATE_TFENV_VERSION_FILES=0
+if [ "${INPUT_UPDATE_TFENV_VERSION_FILES}" == "1" ] || [ "${INPUT_UPDATE_TFENV_VERSION_FILES}" == "true" ]; then
+  UPDATE_TFENV_VERSION_FILES=1
 fi
 
 PR_BASE_BRANCH="${GITHUB_REF##*/}"

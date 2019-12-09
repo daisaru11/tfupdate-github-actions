@@ -15,6 +15,10 @@ inputs:
   tfupdate_provider_name:
     description: 'A name of provider (used if `provider` is given as the subcommand)'
     required: false
+  update_tfenv_version_files:
+    description: 'Whether of not to update .terraform-version files (used if `terraform` is given as the subcommand)'
+    default: false
+    required: false
   github_token:
     description: 'Github Token'
     required: true
