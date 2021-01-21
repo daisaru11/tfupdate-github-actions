@@ -24,7 +24,10 @@ function subcommandTerraform {
             echo "$VERSION" > "$TFENV_VERSION_FILE"
           fi
         done
-        git add . 
+        if [ -f ".terraform-version" ]; then
+          echo "$VERSION" > ".terraform-version"
+        fi
+        git add .
       fi
 
       git commit -m "$UPDATE_MESSAGE"
